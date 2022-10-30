@@ -48,6 +48,7 @@ class Main {
             }
             switch (opcao) {
                 case 1:
+                    cadastrarAluno();
                     break;
                 case 2:
                     consultarNotaAluno();
@@ -57,23 +58,47 @@ class Main {
                     break;
             }
         } while (opcao != 4);
+        System.out.println("\nVolte sempre!");
     }
 
-    public static void consultarNotaAluno () {
+    private static void cadastrarAluno() {
+        Scanner in = new Scanner(System.in);
+
+        if (TAMANHO == qtde+1)
+            System.out.println("\nNão é possível incluir novo aluno(a).\nQuantidade máxima de alunos!");            
+        else {
+            if (qtde > 0) qtde++; // se não houver aluno, registro inicial é 0
+
+            System.out.println("\nCADASTRAR ALUNO(A)");
+            
+            System.out.print("Nome do Aluno(a): ");
+            nomes[qtde] = in.next();
+    
+            System.out.print("Nota da AV1: ");
+            av1[qtde] = Float.parseFloat(in.next());
+            
+            System.out.print("Nota da AV2: ");
+            av2[qtde] = Float.parseFloat(in.next());            
+        }    
+    }
+
+    private static void consultarNotaAluno () {
         int matricula;
         Scanner in = new Scanner(System.in);
         
-        System.out.print("Digite a matrícula: ");
+        System.out.print("\nDigite a matrícula: ");
         matricula = Integer.valueOf(in.next());
 
-        if (matricula < 0 || matricula > qtde)
+        if (qtde == 0 || matricula < 0 || matricula > qtde)
             System.out.println("Matrícula inexistente!\n");                
         else
             consultarAluno(matricula);
     }
     
-    public static void consultarAluno(int i) {
-        System.out.print("\nNome do Aluno(a): ");
+    private static void consultarAluno(int i) {
+        System.out.println("\nNOTA DO ALUNO(A) " + Integer.toString(i));
+
+        System.out.print("Nome do Aluno(a): ");
         System.out.println(nomes[i]);
 
         System.out.print("Nota da AV1: ");
@@ -89,16 +114,20 @@ class Main {
         System.out.println(situacao(av1[i], av2[i]));                   
     }
 
-    public static void consultarNotasTurma() {
+    private static void consultarNotasTurma() {
         int i;
-        
-        System.out.println("\nNOTAS DA TURMA");
-        for (i=0; i < qtde; i++) {
-            consultarAluno(i);
+
+        if (qtde == 0)
+            System.out.println("\nNenhum aluno(a) na turma!");
+        else {
+            System.out.println("\nNOTAS DA TURMA");
+            for (i=0; i <= qtde; i++) {
+                consultarAluno(i);
+            }
         }
     }
 
-    public static String situacao(float av1, float av2) {
+    private static String situacao(float av1, float av2) {
         if (media(av1, av2) < 4)
             return "Reprovado";
         else if (media(av1, av2) >= 7)
@@ -107,11 +136,12 @@ class Main {
             return "Prova final";
     }
 
-    public static float media(float av1, float av2) {
+    private static float media(float av1, float av2) {
         return (av1+av2)/2;
     }
 
-    public static int teste() {
+    // FUNÇÃO PARA TESTE
+    private static int teste() {
         nomes[0]="Agatha Pires";         av1[0]=5.4f;  av2[0]=8.1f;
         nomes[1]="Alexandre Marques";    av1[1]=7.5f;  av2[1]=2f;
         nomes[2]="Amanda Coelho";        av1[2]=8.8f;  av2[2]=7.4f;
@@ -209,8 +239,8 @@ class Main {
         nomes[94]="Vicente Castro";      av1[94]=8f;   av2[94]=5.4f;
         nomes[95]="Vinícius Ferreira";   av1[95]=8.8f; av2[95]=7.6f;
         nomes[96]="Vitor Mesquita";      av1[96]=7.3f; av2[96]=5.2f;
-        nomes[97]="Vitória Santana";     av1[97]=5.3f; av2[97]=5.6f;
+        nomes[97]="Vitória Santana";     av1[97]=9.3f; av2[97]=5.6f;
 
-        return 97; // retorna quantidade de registros
+        return 97; // retorna quantidade de registros, considernado 0 como registro válido
     }
 }
