@@ -13,15 +13,15 @@
  ***************************************************************************************/
 import java.util.Scanner;
 
-class Main {
-    public static int opcao; // opção do menu
-    public static int qtde = 0;  // quantidade de registros
+public class Main {
+    private static int opcao; // opção do menu
+    private static int qtde = 0;  // quantidade de registros
 
     private static final int TAMANHO = 100;
     
-    public static String [] nomes;
-    public static float  [] av1;
-    public static float  [] av2;
+    private static String [] nomes;
+    private static float  [] av1;
+    private static float  [] av2;
     
     public static void main(String[] args) {        
         Scanner in = new Scanner(System.in);
