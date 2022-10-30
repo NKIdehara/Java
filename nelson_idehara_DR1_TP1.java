@@ -14,10 +14,11 @@
 
 class Main {
   public static void main(String[] args) {
-    System.out.println("Hello world!");
-    System.out.println("Hello world!");
-    System.out.println("Hello world!");
-    System.out.println("Hello world!");
-    System.out.println("Hello world!");
+
+    System.out.println("[1] Registrar as notas de um novo aluno");
+    System.out.println("[2] Consultar boletim de um aluno");
+    System.out.println("[3] Consultar notas da turma");
+    System.out.println("[4] Sair");
+
   }
 }
